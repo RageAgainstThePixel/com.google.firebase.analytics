@@ -1,0 +1,81 @@
+name: upm sync package
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at 00:00 UTC
+  workflow_dispatch:
+env:
+  REGISTRY: https://dl.google.com/games/registry/unity/
+  ARCHIVE: https://developers.google.com/unity/archive
+concurrency: ${{ github.workflow }}
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      versions: ${{ steps.archive.outputs.versions }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: get version(s)
+        id: archive
+        run: |
+          set -e
+          PACKAGE_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+          echo "Package name: $PACKAGE_NAME"
+          GIT_VERSIONS=$(git tag | sort -Vu | tr '\n' ',')
+          ALL_VERSIONS=$(curl -sSf ${{ env.ARCHIVE }} | grep -oP "$PACKAGE_NAME-\K\d+\.\d+\.\d+(?=\.tgz)" | sort -Vu | awk -v last_version="$LAST_VERSION" '$0 > last_version' | tr '\n' ',')
+          if [ -z "$GIT_VERSIONS" ]; then
+            VERSIONS=$ALL_VERSIONS
+          else
+            VERSIONS=$(echo "$ALL_VERSIONS" | tr ',' '\n' | awk -v git_versions="$GIT_VERSIONS" '!index(git_versions,$0)' | tr '\n' ',')
+          fi
+          if [ -z "$VERSIONS" ]; then
+            VERSIONS_JSON="[]"
+          else
+            VERSIONS_JSON=$(echo "[\"${VERSIONS//,/\",\"}\"]" | jq -c '. | map(select(length > 0))')
+          fi
+          echo "Next versions: $VERSIONS_JSON"
+          echo "versions=$VERSIONS_JSON" >> "$GITHUB_OUTPUT"
+  sync:
+    needs: prepare
+    runs-on: ubuntu-latest
+    if: ${{ needs.prepare.outputs.versions != '[]' }}
+    strategy:
+      max-parallel: 1
+      fail-fast: true
+      matrix:
+        version: ${{ fromJson(needs.prepare.outputs.versions) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: sync package@${{ matrix.version }}
+        run: |
+          set -e
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "GitHub Actions"
+
+          echo "::group:: clean workspace"
+          find . -mindepth 1 ! -regex '^./\..*' -print -delete
+          echo "::endgroup::"
+
+          PACKAGE_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+          echo " downloading package $PACKAGE_NAME@${{ matrix.version }}"
+          curl -sSf ${{ env.REGISTRY }}$PACKAGE_NAME/$PACKAGE_NAME-${{ matrix.version }}.tgz --output content.tgz
+
+          if [ ! -f content.tgz ]; then
+            echo "Error: Failed to download package $PACKAGE_NAME@${{ matrix.version }}"
+            exit 1
+          fi
+
+          tar -xzf content.tgz --strip-components=1
+          rm content.tgz
+
+          echo "::group:: commit version changes"
+          git status -u
+          git add --a
+          git commit -m "$PACKAGE_NAME@${{ matrix.version }}"
+          git tag "${{ matrix.version }}"
+          git push origin main --tags
+          echo "::endgroup::"
