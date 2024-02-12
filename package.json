@@ -1,10 +1,11 @@
 {
-  "dependencies": {
-    "com.google.firebase.app": "6.16.0"
-  }, 
   "displayName": "Google Analytics for Firebase", 
-  "version": "6.16.0", 
+  "name": "com.google.firebase.analytics", 
   "unity": "2017.1", 
+  "author": {
+    "name": "Google LLC", 
+    "url": "https://firebase.google.com/docs/analytics/unity/start"
+  }, 
   "keywords": [
     "Google", 
     "Firebase", 
@@ -12,10 +13,9 @@
     "vh-name:FirebaseAnalytics", 
     "vh-name:Google Analytics for Firebase"
   ], 
-  "author": {
-    "name": "Google LLC", 
-    "url": "https://firebase.google.com/docs/analytics/unity/start"
+  "description": "Get free and unlimited game and player analytics\n\nGoogle Analytics helps you understand and engage your players by revealing what actions they\u2019re taking inside your game, where they spend the most time, and why they churn. From acquisition to app usage, Google Analytics will give you insights to make better decisions about your game. You can even combine your analytics data with Google Ads to make sure you're running campaigns that deliver you high-quality players.", 
+  "dependencies": {
+    "com.google.firebase.app": "6.16.1"
   }, 
-  "name": "com.google.firebase.analytics", 
-  "description": "Get free and unlimited game and player analytics\n\nGoogle Analytics helps you understand and engage your players by revealing what actions they\u2019re taking inside your game, where they spend the most time, and why they churn. From acquisition to app usage, Google Analytics will give you insights to make better decisions about your game. You can even combine your analytics data with Google Ads to make sure you're running campaigns that deliver you high-quality players."
+  "version": "6.16.1"
 }
