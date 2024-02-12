@@ -164,6 +164,13 @@ Support
 
 Release Notes
 -------------
+### 7.0.1:
+-   Changes
+    - Firestore: Fixed partial updates in `UpdateAsync()` with
+      `FieldValue.Delete`
+      ([#882](https://github.com/firebase/quickstart-unity/issues/882)).
+    - Remote Config (Android): Fixed the crash bug introduced in 7.0.0.
+
 ### 7.0.0:
 -   Changes
     - General (iOS): iOS SDKs are now built using Xcode 11.7.
