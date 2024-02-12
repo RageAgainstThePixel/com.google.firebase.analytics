@@ -17,6 +17,7 @@ features on *iOS* and *Android*:
 | Firebase Realtime Database         | FirebaseDatabase.unitypackage     |
 | Firebase Remote Config             | FirebaseRemoteConfig.unitypackage |
 | Firebase Storage                   | FirebaseStorage.unitypackage      |
+| Firebase Test Lab                  | FirebaseTestLab.unitypackage      |
 
 The SDK provides .NET 3.x and .NET 4.x compatible packages in the `dotnet3` and
 `dotnet4` directories of the SDK:
@@ -41,6 +42,7 @@ desktop builds on Windows, OS X, and Linux:
 | Firebase Functions                 | FirebaseFunctions.unitypackage    |
 | Firebase Remote Config             | FirebaseRemoteConfig.unitypackage |
 | Firebase Storage                   | FirebaseStorage.unitypackage      |
+| Firebase Test Lab                  | FirebaseTestLab.unitypackage      |
 
 (* See Known Issues in the Release Notes below.)
 
@@ -163,6 +165,46 @@ Support
 
 Release Notes
 -------------
+### Unreleased
+  - Overview
+    - Added experimental support for Firebase Test Lab SDK.
+    - Replaced legacy Fabric Crashlytics Android and iOS SDKs with updated
+      Firebase Crashlytics SDKs.
+  - Changes
+    - Crashlytics (Android and iOS): Updated with the Firebase Crashlytics
+      Android & iOS SDKs, which now use Firebase-specific endpoints rather than
+      the deprecated Fabric endpoints. Crashlytics C# APIs have not changed.
+    - Crashlytics (Editor): Removed UI for managing Fabric API keys, which are
+      no longer required. Migrated Fabric apps will automatically use the Google
+      App Id as defined in the `GoogleServicesInfo.plist` and
+      `google-services.json` files.
+    - Crashlytics (Editor): Fixed an [issue](https://github.com/firebase/quickstart-unity/issues/623)
+      that occurs when Crashlytics is imported using the Unity Package Manager.
+    - Firestore: Fixed several serialization issues on iOS.
+    - Firestore: Added `WaitForPendingWritesAsync` method which allows users to
+      wait on a task that completes when all pending writes are acknowledged
+      by the firestore backend.
+    - Firestore: Added `TerminateAsync` method which terminates the instance,
+      releasing any held resources.
+    - Firestore: Added `ClearPersistenceAsync` method which clears the
+      persistent cache, allowing unit/integration tests to be more isolated.
+    - Firestore: Added `Query.LimitToLast(int n)`, which returns the last
+      `n` documents as the result.
+    - Firestore: Added support for changing Firestore settings.
+    - Test Lab: Experimental release of Test Lab is now available on all
+      supported platforms.
+
+### 6.14.1
+  - Changes
+    - Auth: Added a new method: Firebase.Auth.Credential.IsValid().
+    - Auth: Added Firebase.Auth.FirebaseAccountLinkException which may be thrown
+      by LinkAndRetrieveDataWithCredentialAsync. The exception includes a
+      Firebase.Auth.UserInfo object which may contain additional information
+      about the user's account.
+    - Auth (iOS): Added Firebase.Auth.UserInfo.UpdatedCredential. This
+      credential may be valid in FirebaseAccountLinkExceptions indicating that
+      the credential may be used to sign into Firebase as the Apple-linked user.
+
 ### 6.14.0
   - Changes
     - Firestore: `Firestore.LoggingEnabled` is replaced by `Firestore.LogLevel`
