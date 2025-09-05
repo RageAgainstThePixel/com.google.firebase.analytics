@@ -2,8 +2,8 @@
   <groupId>com.google.firebase</groupId>
   <artifactId>firebase-analytics-unity</artifactId>
   <versioning>
-    <release>13.1.0</release>
-    <versions><version>13.1.0</version></versions>
+    <release>13.2.0</release>
+    <versions><version>13.2.0</version></versions>
     <lastUpdated/>
   </versioning>
 </metadata>
