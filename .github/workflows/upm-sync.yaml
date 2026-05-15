@@ -1,0 +1,9 @@
+name: upm sync package
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at 00:00 UTC
+  workflow_dispatch:
+concurrency: ${{ github.workflow }}
+jobs:
+  sync:
+    uses: RageAgainstThePixel/workflows/.github/workflows/google-package-upm-sync.yml@main
