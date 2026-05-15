@@ -163,11 +163,20 @@ Support
 
 Release Notes
 -------------
+### 6.16.1:
+- Changes
+    - General (Android): Fixes regression in 6.16.0 about Android build error
+      "Program type already present: com.google.firebase.unity.BuildConfig" when
+      make Android build with Crashlytics SDK in Unity 2019 and below.
+    - General: Significantly reduced the filesize of the Linux libraries.
+    - Database (Desktop): Added a function to create directories recursively
+      for persistent storage that fixes segfaults.
+
 ### 6.16.0:
 -   Changes
     - General: Prevent Firebase SDK from causing GC in every frame.
     - General (Editor): Improved the performance of Firebase Editor tools by
-      delay initializatoin when condition met and improve asset searching.
+      delay initialization when condition met and improve asset searching.
     - General: Deprecate Firebase.Unity.Editor.FirebaseEditorExtensions. Most of
       the functions is noop now and will be removed soon.
     - General: **Breaking Change** Remove deprecated functions
