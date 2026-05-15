@@ -12,6 +12,7 @@ features on *iOS* and *Android*:
 | Firebase Dynamic Links             | FirebaseDynamicLinks.unitypackage |
 | Cloud Firestore                    | FirebaseFirestore.unitypackage    |
 | Firebase Functions                 | FirebaseFunctions.unitypackage    |
+| Firebase Installations             | FirebaseInstallations.unitypackage|
 | Firebase Instance ID               | FirebaseInstanceId.unitypackage   |
 | Firebase Messaging                 | FirebaseMessaging.unitypackage    |
 | Firebase Realtime Database         | FirebaseDatabase.unitypackage     |
@@ -163,8 +164,39 @@ Support
 
 Release Notes
 -------------
+### 7.0.0:
+-   Changes
+    - General (iOS): iOS SDKs are now built using Xcode 11.7.
+    - App (Editor): Remove deprecated service account APIs.
+    - App: Remove `FirebaseApp.CheckDependencies()` API.
+    - Analytics: Remove deprecated SetMinimumSessionDuration call.
+    - Installations: Added Installations SDK. See [Documentations](http://firebase.google.com/docs/reference/unity/namespace/firebase/installations) for
+      details.
+    - Instance Id: Marked Instance Id as deprecated.
+    - Messaging: Added getToken, deleteToken apis.
+    - Messaging: Removed deprecated Send() function.
+    - Storage: Remove deprecated `DownloadUrl` and `DownloadUrls` properties in
+      `StorageMetadata`.
+    - Messaging: raw_data has been changed from a std::string to a byte array.
+    - Dynamic Links: Remove deprecated `DynamicLinkComponents.DynamicLinkDomain`
+      . Please use `DynamicLinkComponents.DomainUriPrefix` instead.
+    - Dynamic Links (Android): Bump up Android library version and remove
+      dependency to GMS app invite.
+    - Firestore: Added support for `WhereNotEqualTo` and `WhereNotIn` queries.
+    - Firestore: Added new internal HTTP headers to the gRPC connection.
+    - Firestore: Fixed a Unity Editor hang on Windows when restarting an app
+      after listening to a query, document, or snapshots in sync
+      ([#845](https://github.com/firebase/quickstart-unity/issues/845)).
+    - Firestore: Added support for `FirebaseFirestoreSettings.CacheSizeBytes`.
+    - Firestore: Fixed an intermittent crash in the Unity Editor when the app is
+      restarted while a transaction is in progress
+      ([#783](https://github.com/firebase/quickstart-unity/issues/783)).
+    - Firestore: Fixed a crash when writing to a document after having been
+      offline for long enough that the auth token expired
+      ([#872](https://github.com/firebase/quickstart-unity/issues/872)).
+
 ### 6.16.1:
-- Changes
+-   Changes
     - General (Android): Fixes regression in 6.16.0 about Android build error
       "Program type already present: com.google.firebase.unity.BuildConfig" when
       make Android build with Crashlytics SDK in Unity 2019 and below.
