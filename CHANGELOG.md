@@ -169,6 +169,7 @@ Release Notes
     - Firestore: Added `Error.None` as a synonym for `Error.Ok`, which is more
       consistent with other Firebase Unity APIs.
     - auth.SWIG: Fix typo (across).
+    - Firestore: Fixed leaked memory in FirebaseFirestore C# objects.
 
 ### 6.15.2
   - Overview
