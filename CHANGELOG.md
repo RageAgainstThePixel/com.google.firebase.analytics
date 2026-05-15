@@ -109,6 +109,10 @@ Support
 
 Release Notes
 -------------
+### 13.5.0
+-   Changes
+    - Firebase AI: Add support for receiving Live API Transcripts.
+
 ### 13.4.0
 -   Changes
     - General: Update to Firebase C++ SDK version 13.2.0.
