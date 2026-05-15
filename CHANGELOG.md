@@ -109,6 +109,12 @@ Support
 
 Release Notes
 -------------
+### 13.3.0
+-   Changes
+    - Firebase AI: Add support for enabling the model to use Code Execution.
+    - Messaging: Fix crash when deleting a Message with a Notification.
+      ([#1334](https://github.com/firebase/firebase-unity-sdk/issues/1334)).
+
 ### 13.2.0
 -   Changes
     - General: Update to Firebase C++ SDK version 13.1.0.
