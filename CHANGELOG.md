@@ -17,7 +17,6 @@ features on *iOS* and *Android*:
 | Firebase Realtime Database         | FirebaseDatabase.unitypackage     |
 | Firebase Remote Config             | FirebaseRemoteConfig.unitypackage |
 | Firebase Storage                   | FirebaseStorage.unitypackage      |
-| Firebase Test Lab                  | FirebaseTestLab.unitypackage      |
 
 The SDK provides .NET 3.x and .NET 4.x compatible packages in the `dotnet3` and
 `dotnet4` directories of the SDK:
@@ -42,7 +41,6 @@ desktop builds on Windows, OS X, and Linux:
 | Firebase Functions                 | FirebaseFunctions.unitypackage    |
 | Firebase Remote Config             | FirebaseRemoteConfig.unitypackage |
 | Firebase Storage                   | FirebaseStorage.unitypackage      |
-| Firebase Test Lab                  | FirebaseTestLab.unitypackage      |
 
 (* See Known Issues in the Release Notes below.)
 
@@ -165,11 +163,11 @@ Support
 
 Release Notes
 -------------
-### Unreleased
+### 6.15.0
   - Overview
-    - Added experimental support for Firebase Test Lab SDK.
     - Replaced legacy Fabric Crashlytics Android and iOS SDKs with updated
       Firebase Crashlytics SDKs.
+    - Reduce editor freeze when play mode starts.
   - Changes
     - Crashlytics (Android and iOS): Updated with the Firebase Crashlytics
       Android & iOS SDKs, which now use Firebase-specific endpoints rather than
@@ -178,8 +176,11 @@ Release Notes
       no longer required. Migrated Fabric apps will automatically use the Google
       App Id as defined in the `GoogleServicesInfo.plist` and
       `google-services.json` files.
-    - Crashlytics (Editor): Fixed an [issue](https://github.com/firebase/quickstart-unity/issues/623)
+    - Crashlytics (Editor): Fixed an [issue](https://github.com/firebase/quickstart-unity/issues/652)
       that occurs when Crashlytics is imported using the Unity Package Manager.
+    - Crashlytics: Added `[assembly: Preserve]` attribute to
+      Firebase.Crashlytics namespace, to prevent stripping of Crashlytics code
+      by the UnityLinker.
     - Firestore: Fixed several serialization issues on iOS.
     - Firestore: Added `WaitForPendingWritesAsync` method which allows users to
       wait on a task that completes when all pending writes are acknowledged
@@ -193,6 +194,15 @@ Release Notes
     - Firestore: Added support for changing Firestore settings.
     - Test Lab: Experimental release of Test Lab is now available on all
       supported platforms.
+    - Firestore: Removed the `DocumentReference.ListenerDelegate` and
+      `Query.ListenerDelegate` delegates. These were intended to be
+      internal-only types.
+    - General: Reduce editor freeze when play mode starts by not running
+      XcodeProjectPatcher, GeneratedXmlFromGoogleServices and
+      AndroidManifestPatcher if the editor is in play mode or about to start
+      play mode.
+    - Messaging: (Android) Using the MessagingUnityPlayerActivity will no longer
+      interfere with Unity's built-in handling of deep links.
 
 ### 6.14.1
   - Changes
