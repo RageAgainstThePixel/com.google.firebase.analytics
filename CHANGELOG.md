@@ -163,13 +163,42 @@ Support
 
 Release Notes
 -------------
-### TBD:
+### 6.16.0:
+-   Changes
+    - General: Prevent Firebase SDK from causing GC in every frame.
+    - General (Editor): Improved the performance of Firebase Editor tools by
+      delay initializatoin when condition met and improve asset searching.
+    - General: Deprecate Firebase.Unity.Editor.FirebaseEditorExtensions. Most of
+      the functions is noop now and will be removed soon.
+    - General: **Breaking Change** Remove deprecated functions
+      `FirebaseApp.SetEditorAuthUserId()` and
+      `FirebaseApp.GetEditorAuthUserId()` in order to improve performance.
+    - General: (Android) Fixed that FirebaseApp failed to create for builds
+      created by Unity 2020+ due to google-services.json not found. All Firebase
+      Android resource files are moved to directories with `androidlib`
+      extension.
+    - General: (Android) Remove android:minSdkVersion from AndroidManifest.xml
+      under `Assets/Plugins/Android/Firebase` which is causing build error in
+      Unity 2020.
     - Database (Desktop): Enabled offline persistence.
     - Firestore: Fixed FirebaseFirestore.LogLevel for some log levels.
     - Firestore: Added `Error.None` as a synonym for `Error.Ok`, which is more
       consistent with other Firebase Unity APIs.
     - auth.SWIG: Fix typo (across).
     - Firestore: Fixed leaked memory in FirebaseFirestore C# objects.
+    - Crashlytics: Fixed an issue on iOS where the Crashlytics Run Script would fail to get added on versions of Unity 2018 and below [#5569](https://github.com/firebase/firebase-ios-sdk/issues/5569)
+    - Crashlytics: (Android) Fixed crashes for builds created by Unity 2020+ due
+      to build ID is missing. Generated Crashlytics Android resource files are
+      moved to `Plugins/Android/FirebaseCrashlytics.androidlib`.
+    - Firestore: Fixed `CollectionReference.AddAsync()` to propagate errors.
+    - Firestore: Changed async tasks to fault with `FirestoreException`.
+    - Firestore: Renamed the `Error` enum to `FirestoreError`.
+    - Messaging (Android): Updated library to be compatible with Android O,
+      which should resolve a IllegalStateException that could occur under
+      certain conditions.
+    - Messaging: Deprecated the `Send` function.
+    - Firestore: Added meaningful error messages to the exceptions with which
+      `ListenerRegistration.ListenerTask` tasks fault.
 
 ### 6.15.2
   - Overview
