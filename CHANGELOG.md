@@ -109,6 +109,12 @@ Support
 
 Release Notes
 -------------
+### 13.8.0
+-   Changes
+    - Firebase AI: Add `LiveSessionGoingAway` to handle backend closing.
+    - Firebase AI: Add support for `CachedContentTokenCount` and `CacheTokensDetails`
+      in `UsageMetadata`.
+
 ### 13.7.0
 -   Changes
     - General: Update to Firebase C++ SDK version 13.4.0.
