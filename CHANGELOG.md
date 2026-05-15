@@ -163,6 +163,32 @@ Support
 
 Release Notes
 -------------
+### TBD:
+    - Database (Desktop): Enabled offline persistence.
+    - Firestore: Fixed FirebaseFirestore.LogLevel for some log levels.
+    - Firestore: Added `Error.None` as a synonym for `Error.Ok`, which is more
+      consistent with other Firebase Unity APIs.
+    - auth.SWIG: Fix typo (across).
+
+### 6.15.2
+  - Overview
+  - Changes
+    - Firestore (iOS): Fixed the missing Dispose symbol by updating to the
+      correct Cocoapod version.
+
+### 6.15.1
+  - Overview
+  - Changes
+    - Firestore: Significantly improved stability when reentering play mode,
+      addressing [this issue](https://github.com/firebase/quickstart-unity/issues/638).
+    - Firestore: Fixed memory leaks that could cause a global reference table
+      overflow on Android, addressing [this
+      issue](https://github.com/firebase/quickstart-unity/issues/627).
+    - Fixed an issue that warns about Future handle not released properly.
+    - Firestore: Added the `ListenerRegistration.ListenerTask` property which
+      facilitates discovering an error that causes the listener stream to stop.
+    - Fixed an issue that cause Editor crash on the second time click play.
+
 ### 6.15.0
   - Overview
     - Replaced legacy Fabric Crashlytics Android and iOS SDKs with updated
