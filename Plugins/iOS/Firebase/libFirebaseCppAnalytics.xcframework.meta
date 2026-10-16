@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: bf523cc64d194963aa7661e7d2944feb
+guid: da526e32f1584ece88563b53d35851a9
 labels:
 - gvh
-- gvh_version-13.17.0
-- gvhp_exportpath-Plugins/iOS/Firebase/libFirebaseCppAnalytics.a
+- gvh_version-14.0.0
+- gvhp_exportpath-Plugins/iOS/Firebase/libFirebaseCppAnalytics.xcframework
 timeCreated: 1480838400
 PluginImporter:
   serializedVersion: 1
